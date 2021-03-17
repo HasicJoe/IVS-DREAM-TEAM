@@ -11,7 +11,7 @@
 
 Spôsob komunikácie : Discord server vytvorený pre účely projektu
 
-Termíny : 22.2.2021 - Vytvorenie repozitára GIT
+Termíny : 23.2.2021 - Vytvorenie repozitára GIT
           15.3.2021 - Teambuilding - výber programovacieho jazyka, nastavenie tímových pravidiel
           18.3.2021 - Odovzdať plán projektu                                (Vedúci)
           29.4.2021 - Odovzdanie repozitára, dokumentácia (generovaná),     (Vedúci)
