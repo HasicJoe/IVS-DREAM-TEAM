@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////
 //                        Plán projektu z IVS                         //  
 //                                                                    //      
-//                     Štefan Gajdošík - xgajdo30                     //                                                        
+//                     Štefan Gajdošík - xgajdo30   (Vedúci) eeedfhcgvewsdu                 //                                                        
 //                     Daniel Gavenda - xgaven08                      //                                                           
 //                     Juraj Hatala - xhatal01                        //
 //                     Samuel Valaštín - xvalas10                     //   
