@@ -23,9 +23,9 @@ Termíny : 22.2.2021 - Vytvorenie repozitára GIT
 
 Rozdelenie práce na projekte: 
                              xvalas10 - GUI - PyQt, mockup
-                             xgaven08 - inštalácia/odinštalácia + zostavenie programu, profilling, mockup
+                             xgaven08 - inštalácia/odinštalácia + zostavenie programu, makefile, profilling, mockup
                              xhatal01 - matematická knižnica + testy, mockup
-                             xgajdo30 - matematická knižnica + dokumentácia  (vrátane manuálu), mockup, testy, makefile
+                             xgajdo30 - matematická knižnica + dokumentácia  (vrátane manuálu), mockup, testy
 
 
 Deadlines :
