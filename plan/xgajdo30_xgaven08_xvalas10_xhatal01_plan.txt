@@ -1,9 +1,38 @@
-Tento soubor bude obsahovat:
+////////////////////////////////////////////////////////////////////////
+//                        Plán projektu z IVS                         //  
+//                                                                    //      
+//                     Štefan Gajdošík - xgajdo30                     //                                                        
+//                     Daniel Gavenda - xgaven08                      //                                                           
+//                     Juraj Hatala - xhatal01                        //
+//                     Samuel Valaštín - xvalas10                     //   
+//                                                                    //
+////////////////////////////////////////////////////////////////////////
 
--- stanovené termíny,
--- přidělení úkolů na projektu jednotlivým řešitelům,
--- zvolené komunikační kanály pro komunikaci v týmu a stanovená pravidla pro komunikaci (jsou-li nějaká),
--- zvolený systém pro správu verzí a hosting + informaci, jak do repozitáře mohou nahlédnout vyučující/cvičící (viz níže).
 
-Alternativně lze odevzdat archiv xlogin01_xlogin02_xlogin03_xlogin04_plan.zip, který bude obsahovat libovolný počet souborů xlogin01_xlogin02_xlogin03_xlogin04_plan* ("*" zastupuje libovolný počet libovolných znaků, tedy např. ".mpp" či "01.jpg"), přičemž plán zde může být vytvořený v MS Projectu či jiném programu (není-li daný program ve škole dostupný, je nutno odevzdat i exportovanou verzi v PDF či jpg).
-teamleader je borec
+Spôsob komunikácie : Discord server vytvorený pre účely projektu
+
+Termíny : 18.3.2021 - Odovzdať plán projektu                                (Vedúci)
+          29.4.2021 - Odovzdanie repozitára, dokumentácia (generovaná),     (Vedúci)
+                      inštalátor + odinštalátor
+          21.5.2021 - Odovzdať .txt súbor s problémami na projekte          !!!!! Každý člen tímu !!!!!               
+          
+
+
+
+Rozdelenie práce na projekte: 
+                             xvalas10 - GUI
+                             xgaven08 - inštalácia/odinštalácia + zostavenie programu
+                             xhatal01 - matematická knižnica + testy
+                             xgajdo30 - matematická knižnica + dokumentácia  (vrátane manuálu)
+
+
+Deadlines :
+           Všetci:
+                  ! 23.4.2021 - Všetko musí byť hotové !
+
+            + každý týždeň (sobota) - stretnutie - odprezentovanie doterajšej práce na projekte tímu
+
+
+Jazyk : Python 3.7.4
+
+GitHub : https://github.com/HasicJoe/IVS-DREAM-TEAM
