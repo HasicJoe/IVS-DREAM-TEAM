@@ -1,7 +1,11 @@
 ////////////////////////////////////////////////////////////////////////
 //                        Plán projektu z IVS                         //  
 //                                                                    //      
+<<<<<<< HEAD
 //                     Štefan Gajdošík - xgajdo30   (Vedúci) eeedfhcgvewsdu                 //                                                        
+=======
+//                     Štefan Gajdošík - xgajdo30 (Teamleader)        //                                                        
+>>>>>>> df412105875842ad085ddb3f5ffc0ee7900d4b8e
 //                     Daniel Gavenda - xgaven08                      //                                                           
 //                     Juraj Hatala - xhatal01                        //
 //                     Samuel Valaštín - xvalas10                     //   
@@ -11,7 +15,9 @@
 
 Spôsob komunikácie : Discord server vytvorený pre účely projektu
 
-Termíny : 18.3.2021 - Odovzdať plán projektu                                (Vedúci)
+Termíny : 22.2.2021 - Vytvorenie repozitára GIT
+          15.3.2021 - Teambuilding - výber programovacieho jazyka, nastavenie tímových pravidiel
+          18.3.2021 - Odovzdať plán projektu                                (Vedúci)
           29.4.2021 - Odovzdanie repozitára, dokumentácia (generovaná),     (Vedúci)
                       inštalátor + odinštalátor
           21.5.2021 - Odovzdať .txt súbor s problémami na projekte          !!!!! Každý člen tímu !!!!!               
@@ -20,10 +26,10 @@ Termíny : 18.3.2021 - Odovzdať plán projektu                                (
 
 
 Rozdelenie práce na projekte: 
-                             xvalas10 - GUI
-                             xgaven08 - inštalácia/odinštalácia + zostavenie programu
-                             xhatal01 - matematická knižnica + testy
-                             xgajdo30 - matematická knižnica + dokumentácia  (vrátane manuálu)
+                             xvalas10 - GUI - PyQt, mockup
+                             xgaven08 - inštalácia/odinštalácia + zostavenie programu, profilling, mockup
+                             xhatal01 - matematická knižnica + testy, mockup
+                             xgajdo30 - matematická knižnica + dokumentácia  (vrátane manuálu), mockup, testy, makefile
 
 
 Deadlines :
@@ -32,6 +38,8 @@ Deadlines :
 
             + každý týždeň (sobota) - stretnutie - odprezentovanie doterajšej práce na projekte tímu
 
+Pravidlá:
+    V dôležitých okolnostiach prebehne tímové hlasovanie, v prípade nerozhodného výsledku má rozhodujúci hlas teamleader.
 
 Jazyk : Python 3.7.4
 
