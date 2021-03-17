@@ -1,11 +1,7 @@
 ////////////////////////////////////////////////////////////////////////
 //                        Plán projektu z IVS                         //  
 //                                                                    //      
-<<<<<<< HEAD
-//                     Štefan Gajdošík - xgajdo30   (Vedúci) eeedfhcgvewsdu                 //                                                        
-=======
 //                     Štefan Gajdošík - xgajdo30 (Teamleader)        //                                                        
->>>>>>> df412105875842ad085ddb3f5ffc0ee7900d4b8e
 //                     Daniel Gavenda - xgaven08                      //                                                           
 //                     Juraj Hatala - xhatal01                        //
 //                     Samuel Valaštín - xvalas10                     //   
