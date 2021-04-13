@@ -40,3 +40,4 @@ Pravidlá:
 Jazyk : Python 3.7.4
 
 GitHub : https://github.com/HasicJoe/IVS-DREAM-TEAM
+test Github sry
