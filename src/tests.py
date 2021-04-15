@@ -109,7 +109,6 @@ def test_div_zero():
     with pytest.raises(ZeroDivisionError):
         div(45685,0)
         div(0,0)
-        div(000.00,0000)
 
 def test_div_negative():
     assert div(81,-9) == -9
@@ -155,3 +154,51 @@ def test_exponent_zero():
     assert exponent(9,0) == 1
     assert exponent(98797,0) == 1
     assert math.isnan(exponent(0,0))
+
+
+def test_root_basic():
+    assert root(2, 1) == 1
+    assert root(3,1) == 1
+    assert root(2, 4) == 2
+    assert root(2, 9) == 3
+    assert root(3, 27) == 3
+    assert root(4, 16) == 2
+    assert root(5, 243) == 3
+    assert root(5, 130691232) == 42
+
+
+def test_root_zero():
+    assert math.isnan(root(0, 42))
+    assert math.isnan(root(0, 0))
+    assert math.isnan(root(0, -50))
+    assert root(42, 0) == 0
+
+
+def test_root_negative():
+    assert math.isnan(root(2, -42))
+    assert math.isnan(root(2, -50))
+    assert root(3, -27) == -3
+    assert root(3, -8) == -2
+    assert math.isnan(root(4, -36))
+
+
+def test_mod_basic():
+    assert mod(51651351, 2) == 1
+    assert mod(15, 3) == 0
+    assert mod(36, 36) == 0
+    assert mod(115, 42) == 31
+    assert mod(115, 165) == 50
+    assert mod(238, 420) == 182
+
+
+def test_mod_zero():
+    assert math.isnan(mod(42, 0))
+    assert math.isnan(mod(0,0))
+    assert mod(0, 42) == 0
+
+
+def test_mod_negative():
+    assert mod(-2, 2) == 0
+    assert mod(2, -2) == 0
+    assert mod(-2, -2) == 0
+    assert math.isnan(mod(-42, 0))
