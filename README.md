@@ -2,18 +2,17 @@ Prostredi
 ---------
 
 Ubuntu 64bit
-Windows 64bit
 
 Autori
 ------
 
-Nazev tymu
-- xlogin01 jmeno prijmeni 
-- xlogin02 jmeno prijmeni 
-- xlogin03 jmeno prijmeni 
-- xlogin04 jmeno prijmeni 
+Chlapci z TN
+- Štefan Gajdošík - xgajdo30 (Teamleader)
+- Daniel Gavenda - xgaven08        
+- Juraj Hatala - xhatal01
+- Samuel Valaštín - xvalas10 
 
 Licence
 -------
 
-Tento program je poskytovan...
+Tento program je poskytovan ...
