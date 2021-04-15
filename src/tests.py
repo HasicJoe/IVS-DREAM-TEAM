@@ -202,3 +202,11 @@ def test_mod_negative():
     assert mod(2, -2) == 0
     assert mod(-2, -2) == 0
     assert math.isnan(mod(-42, 0))
+
+
+def test_mod_decimal():
+    with pytest.raises(TypeError):
+        mod(0, 4.2)
+        mod(42, 4.2)
+        mod(4.2, 2)
+        mod(4.2, 4.2)
