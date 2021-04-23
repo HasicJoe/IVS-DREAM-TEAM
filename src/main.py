@@ -1,10 +1,17 @@
+import sys
+from PyQt5 import QtWidgets, uic
+from gui.gui import Ui_MainWindow
 
 
 
+class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
+    def __init__(self, *args, obj=None, **kwargs):
+        super(MainWindow, self).__init__(*args, **kwargs)
+        self.setupUi(self)
 
 
-def main():
-    print("Hello fit\n")
+app = QtWidgets.QApplication(sys.argv)
 
-if __name__ = "main":
-    main()
+window = MainWindow()
+window.show()
+app.exec()
