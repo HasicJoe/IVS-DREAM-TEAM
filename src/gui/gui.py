@@ -45,7 +45,7 @@ class Ui_MainWindow(object):
         self.key_c.setMaximumSize(QtCore.QSize(380, 200))
         self.key_c.setStyleSheet("color: rgb(241, 241, 241);\n"
 "font: 75 18pt \"Courier New\";\n"
-"background-color: rgb(80, 21, 140);")
+"background-color: rgb(40, 3, 77);")
         self.key_c.setObjectName("pushButton")
         self.gridLayout.addWidget(self.key_c, 1, 0, 1, 1)
         self.key_mod = QtWidgets.QPushButton(self.centralwidget)
