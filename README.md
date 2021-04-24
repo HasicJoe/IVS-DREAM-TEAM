@@ -15,4 +15,4 @@ Chlapci z TN
 Licence
 -------
 
-Tento program je poskytovan ...
+Tento program je poskytovan GNU GPL v.3
