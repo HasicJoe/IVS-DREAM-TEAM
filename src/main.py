@@ -15,6 +15,6 @@ app = QtWidgets.QApplication(sys.argv)
 window = MainWindow()
 window.show()
 
-evthandler.bind(window)
+evthandler.bind_event(window)
 
 app.exec()
