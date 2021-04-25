@@ -167,6 +167,7 @@ def keyboardEventHandler(event):
         function = ActionDict[event.key()]
     # handle multi character binds (may be changed)
     except KeyError:
+        # for debugging purposes
         print('Key', event.key(), 'is not defined in action dict')
         print(Qt.Key_BracketLeft)
     # perform the action
