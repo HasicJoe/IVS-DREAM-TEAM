@@ -1,5 +1,5 @@
 import sys
-import lib.eventhandler as evthandler
+import lib.eventhandler as eh
 from PyQt5 import QtWidgets, QtCore, uic
 from PyQt5.QtCore import Qt
 from gui.gui import Ui_MainWindow
@@ -18,6 +18,7 @@ if __name__ == "__main__":
     window = MainWindow()
     window.show()
 
-    evthandler.bind_event(window)
+    # bind event handler to the main window
+    eh.EventHandler(window)
 
     app.exec()
