@@ -1,5 +1,6 @@
 from PyQt5 import QtWidgets, uic
 from PyQt5.QtCore import Qt
+import PyQt5.QtGui as gui
 import lib.mathlib as math
 
 # add Number symbols to stack
@@ -54,8 +55,8 @@ def addModulo():
 
 # add math Functions to the stack
 
-def addSquare():
-    math.Symbol(math.SymbolType.FUNCTION, math.FunctionType.SQUARE, '^')
+def addExp():
+    math.Symbol(math.SymbolType.FUNCTION, math.FunctionType.EXP, '^')
 
 def addNthRoot():
     math.Symbol(math.SymbolType.FUNCTION, math.FunctionType.NTHROOT, '√')
@@ -105,10 +106,7 @@ ActionDict = {
     # key_'%' == 37
     37 : addModulo,
 
-    # TODO: math operations
-    Qt.Key_F : addFactorial,
-    Qt.Key_R : addRandom,
-    Qt.Key_E : addSquare,
+    #  math operations (done with multiCharacterEventHandler)
 
     # brackets
     # key_'(' == 40
@@ -117,11 +115,15 @@ ActionDict = {
     41 : addRightBracket,
 
     # commands
-    Qt.Key_C : Clear,
+    Qt.Key_Escape : Clear,
     Qt.Key_Enter : Execute,
     Qt.Key_Return : Execute
 }
-# 
+
+def updateDisplay(event):
+    print(event)
+
+# bind mouse and keyboard events to the main window 
 def bind_event(window):
     # keyboard input handler
     window.keyPressEvent = keyboardEventHandler
@@ -147,7 +149,7 @@ def bind_event(window):
     window.key_mod.clicked.connect(addModulo)
     
     # math functions
-    window.key_exp.clicked.connect(addSquare)
+    window.key_exp.clicked.connect(addExp)
     window.key_root.clicked.connect(addNthRoot)
     window.key_fact.clicked.connect(addFactorial)
     window.key_rand.clicked.connect(addRandom)
@@ -159,17 +161,43 @@ def bind_event(window):
     # command buttons
     window.key_eq.clicked.connect(Execute)
     window.key_c.clicked.connect(Clear)
-   
 
+# key handler which perform actions upon entered multiple keys
+enteredList = []
+MultiCharActionDict = {
+    'FACT' : addFactorial,
+    'RAND' : addRandom, 
+    'MOD'  : addModulo,
+    'EXP'  : addExp,
+    'ROOT' : addNthRoot,
+    'CLEAR': Clear
+}
+def multiCharacterEventHandler(event):
+    #FACT, RAND, SQRT
+    try:
+        enteredList.append(chr(event.key()))
+    except ValueError:
+        # key is not from alphabet range
+        pass
+    else:
+        sequence = ''.join(enteredList)
+        for key, action in MultiCharActionDict.items():
+            if key in sequence:
+                action()
+                enteredList.clear()
+
+# general keyboard handler
 def keyboardEventHandler(event):
+    print(event.count())
+    for k, v in gui.QKeyEvent.__dict__.items():
+        pass
+        print(k, v)
     # get action from the action dictionary
     try:
         function = ActionDict[event.key()]
     # handle multi character binds (may be changed)
-    except KeyError:
-        # for debugging purposes
-        print('Key', event.key(), 'is not defined in action dict')
-        print(Qt.Key_BracketLeft)
+    except KeyError:      
+        multiCharacterEventHandler(event)
     # perform the action
     else:
         function()

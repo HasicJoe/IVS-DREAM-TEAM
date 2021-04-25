@@ -7,7 +7,7 @@ class OperatorType():
     MODULO = 5
 
 class FunctionType():
-    SQUARE = 1
+    EXP = 1
     NTHROOT = 2
     FACTORIAL = 3
     RANDOM = 4
@@ -28,3 +28,7 @@ class Symbol():
         self.display = display
         Symbol.SymbolList.append(self)
         print([symb.display for symb in Symbol.SymbolList])
+
+
+# operations
+
