@@ -25,8 +25,8 @@ class Symbol():
         self.type = type
         self.value = value
         self.display = display
-        Symbol.SymbolList.append(self)
-        print([symb.display for symb in Symbol.SymbolList])
+        SymbolList.append(self)
+        print([symb.display for symb in SymbolList])
 
 # types of tokens to provide execution
 class TokenType():
@@ -56,13 +56,23 @@ class Token():
         self.value = value
     # operations
 
-# 
-def Compute():
+# translate symbol list into list of tokens
+def PopulateTokens():
+    numberBuffer = ''
     for symb in SymbolList:
         if symb.type in [SymbolType.COMMA, SymbolType.NUMBER]:
-            
+            numberBuffer+=str(symb.value)
         else:
+            if numberBuffer:
+                TokenList.append(Token(TokenType.NUMBER, float(numberBuffer)))
+                numberBuffer = ''
             TokenList.append(Token(symb.type, -1))
+    if numberBuffer:
+        TokenList.append(Token(TokenType.NUMBER, float(numberBuffer)))
+
+def Compute():
+    PopulateTokens()
+    print([token.value for token in TokenList])
 
 def add(a, b):
     return a + b

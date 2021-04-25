@@ -87,7 +87,7 @@ class EventHandler():
         self.UpdateDisplay()
 
     def addDecimalPoint(self):
-        math.Symbol(math.SymbolType.COMMA, ',', ',')
+        math.Symbol(math.SymbolType.COMMA, '.', ',')
         self.UpdateDisplay()
 
     # add math operators to the stack
