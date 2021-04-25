@@ -48,80 +48,107 @@ class EventHandler():
     # add Number symbols to stack
     def addNumberZero(self):
         math.Symbol(math.SymbolType.NUMBER, 0, '0')
+        self.UpdateDisplay()
 
     def addNumberOne(self):
         math.Symbol(math.SymbolType.NUMBER, 1, '1')
+        self.UpdateDisplay()
 
     def addNumberTwo(self):
         math.Symbol(math.SymbolType.NUMBER, 2, '2')
+        self.UpdateDisplay()
 
     def addNumberThree(self):
         math.Symbol(math.SymbolType.NUMBER, 3, '3')
+        self.UpdateDisplay()
 
     def addNumberFour(self):
         math.Symbol(math.SymbolType.NUMBER, 4, '4')
+        self.UpdateDisplay()
 
     def addNumberFive(self):
         math.Symbol(math.SymbolType.NUMBER, 5, '5')
+        self.UpdateDisplay()
 
     def addNumberSix(self):
         math.Symbol(math.SymbolType.NUMBER, 6, '6')
+        self.UpdateDisplay()
 
     def addNumberSeven(self):
         math.Symbol(math.SymbolType.NUMBER, 7, '7')
+        self.UpdateDisplay()
 
     def addNumberEight(self):
         math.Symbol(math.SymbolType.NUMBER, 8, '8')
+        self.UpdateDisplay()
 
     def addNumberNine(self):
         math.Symbol(math.SymbolType.NUMBER, 9, '9')
+        self.UpdateDisplay()
 
     def addDecimalPoint(self):
         math.Symbol(math.SymbolType.COMMA, ',', ',')
+        self.UpdateDisplay()
 
     # add math operators to the stack
     def addPlus(self):
-        math.Symbol(math.SymbolType.OPERATOR, math.OperatorType.PLUS, '+')
+        math.Symbol(math.SymbolType.PLUS,0, '+')
+        self.UpdateDisplay()
 
     def addMinus(self):
-        math.Symbol(math.SymbolType.OPERATOR, math.OperatorType.MINUS, '-')
+        math.Symbol(math.SymbolType.MINUS,0, '-')
+        self.UpdateDisplay()
 
     def addMultiply(self):
-        math.Symbol(math.SymbolType.OPERATOR, math.OperatorType.MULTIPLY, '*')
+        math.Symbol(math.SymbolType.MULTIPLY,0, '*')
+        self.UpdateDisplay()
 
     def addDivide(self):
-        math.Symbol(math.SymbolType.OPERATOR, math.OperatorType.DIVIDE, '/')
+        math.Symbol(math.SymbolType.DIVIDE,0, '/')
+        self.UpdateDisplay()
 
     def addModulo(self):
-        math.Symbol(math.SymbolType.OPERATOR, math.OperatorType.MODULO, 'mod')
+        math.Symbol(math.SymbolType.MODULO,0, 'mod')
+        self.UpdateDisplay()
 
     # add math Functions to the stack
     def addExp(self):
-        math.Symbol(math.SymbolType.FUNCTION, math.FunctionType.EXP, '^')
+        math.Symbol(math.SymbolType.EXP,0, '^')
+        self.UpdateDisplay()
 
     def addNthRoot(self):
-        math.Symbol(math.SymbolType.FUNCTION, math.FunctionType.NTHROOT, '√')
+        math.Symbol(math.SymbolType.ROOT,0, '√')
+        self.UpdateDisplay()
 
     def addFactorial(self):
-        math.Symbol(math.SymbolType.FUNCTION, math.FunctionType.FACTORIAL, '!')
+        math.Symbol(math.SymbolType.FACTORIAL,0, '!')
+        self.UpdateDisplay()
 
     def addRandom(self):
-        math.Symbol(math.SymbolType.FUNCTION, math.FunctionType.RANDOM, 'rand')
+        math.Symbol(math.SymbolType.RANDOM,0, 'rand')
+        self.UpdateDisplay()
 
     # add math brackets to the stack
     def addLeftBracket(self):
         math.Symbol(math.SymbolType.LEFT_BRACKET, '(', '(')
+        self.UpdateDisplay()
 
     def addRightBracket(self):
         math.Symbol(math.SymbolType.RIGHT_BRACKET, ')', ')')
+        self.UpdateDisplay()
 
-    # TODO:clear the console display (clear the display label and the symbol stack)
     def Clear(self):
-        print('clear display')
+        math.SymbolList.clear()
+        self.window.label.setText('0,000')
 
-    # TODO: execute the computation (call mathlib)
     def Execute(self):
-        print('execute')
+        math.Compute()
+        self.UpdateDisplay()
+
+
+    # set value from Symbol list to the calc display
+    def UpdateDisplay(self):
+        self.window.label.setText(''.join([sym.display for sym in math.SymbolList]))
 
     # key to action binding
     ActionDict = {
@@ -146,6 +173,8 @@ class EventHandler():
         Qt.Key_Slash : addDivide,
         # key_'%' == 37
         37 : addModulo,
+        # key '^' == 94
+        94 : addExp,
 
         #  math operations (done with multiCharacterEventHandler)
 
@@ -171,7 +200,6 @@ class EventHandler():
         'CLEAR': Clear
     }
     def multiCharacterEventHandler(self, event):
-        #FACT, RAND, SQRT
         try:
             self.enteredList.append(chr(event.key()))
         except ValueError:
@@ -191,6 +219,7 @@ class EventHandler():
             function = EventHandler.ActionDict[event.key()]
         # handle multi character binds (may be changed)
         except KeyError:      
+            print(event.key())
             self.multiCharacterEventHandler(event)
         # perform the action
         else:
