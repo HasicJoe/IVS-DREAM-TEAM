@@ -216,7 +216,7 @@ def PSA(tokens):
         # syntax err
         else:
             print('SYNTAX ERR no operation in precedence table for this expression')
-            exit(1)
+            return
 
 
 def add(a, b):
