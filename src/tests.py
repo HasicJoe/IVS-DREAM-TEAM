@@ -1,7 +1,7 @@
 import pytest
 import random
 import math
-from lol import *
+from lib.mathlib import *
 
 
 
