@@ -99,6 +99,9 @@ def arith_average(sum,list):
 def list_len(list):
     return len(list)
 
+def mod(a,b):
+    return a % b
+
 def fact(n):
     n = int(n)
     return float(1) if n == 1 or n == 0 else float(n * fact(n-1))
