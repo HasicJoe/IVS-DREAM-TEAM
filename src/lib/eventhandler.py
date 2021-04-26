@@ -124,7 +124,6 @@ class EventHandler():
 
     def addFactorial(self):
         math.Symbol(math.SymbolType.FACTORIAL,0, '!')
-        math.Symbol(math.SymbolType.LEFT_BRACKET, '(', '(')
         self.UpdateDisplay()
 
     def addRandom(self):
@@ -152,6 +151,11 @@ class EventHandler():
     def delChar(self):
         if math.SymbolList:
             math.SymbolList.pop()
+        if len(math.SymbolList) > 1:
+            if math.SymbolList[-1].type in [math.SymbolType.RANDOM, 
+                                            math.SymbolType.ROOT, 
+                                            math.SymbolType.EXP]:
+                math.SymbolList.pop()
         self.UpdateDisplay()
 
     # set value from Symbol list to the calc display
