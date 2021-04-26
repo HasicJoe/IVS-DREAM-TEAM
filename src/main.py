@@ -13,10 +13,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         super(MainWindow, self).__init__(*args, **kwargs)
         self.setupUi(self)
 
-
-
 if __name__ == "__main__":    
-    
     if not sys.stdin.isatty():
         pr = cProfile.Profile()
         pf.Profiler(sys.stdin,pr)

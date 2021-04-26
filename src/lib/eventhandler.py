@@ -92,23 +92,23 @@ class EventHandler():
 
     # add math operators to the stack
     def addPlus(self):
-        math.Symbol(math.SymbolType.PLUS,0, '+')
+        math.Symbol(math.SymbolType.PLUS,'+', '+')
         self.UpdateDisplay()
 
     def addMinus(self):
-        math.Symbol(math.SymbolType.MINUS,0, '-')
+        math.Symbol(math.SymbolType.MINUS,'-', '-')
         self.UpdateDisplay()
 
     def addMultiply(self):
-        math.Symbol(math.SymbolType.MULTIPLY,0, '*')
+        math.Symbol(math.SymbolType.MULTIPLY,'*', '*')
         self.UpdateDisplay()
 
     def addDivide(self):
-        math.Symbol(math.SymbolType.DIVIDE,0, '/')
+        math.Symbol(math.SymbolType.DIVIDE,'/', '/')
         self.UpdateDisplay()
 
     def addModulo(self):
-        math.Symbol(math.SymbolType.MODULO,0, 'mod')
+        math.Symbol(math.SymbolType.MODULO,'%', 'mod')
         self.UpdateDisplay()
 
     # add math Functions to the stack
@@ -234,7 +234,6 @@ class EventHandler():
             function = EventHandler.ActionDict[event.key()]
         # handle multi character binds (may be changed)
         except KeyError:      
-            print(event.key())
             self.multiCharacterEventHandler(event)
         # perform the action
         else:
