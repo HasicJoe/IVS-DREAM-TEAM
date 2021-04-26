@@ -1,3 +1,4 @@
+import random 
 
 class SymbolType():
     NUMBER =        0x10
@@ -75,7 +76,6 @@ def Compute():
 
     print([token.value for token in TokenList])
 
-def 
 
 
 def add(a, b):
@@ -96,6 +96,8 @@ def exp(a, b):
 def root(a, b):
     return a ** (1/float(b))
 
+def rand(n):
+    return random.random()*n
 
 def fact(n):
     if n < 0:
