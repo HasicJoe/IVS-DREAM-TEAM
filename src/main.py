@@ -4,6 +4,7 @@ from PyQt5 import QtWidgets, QtCore, uic
 from PyQt5.QtCore import Qt
 from gui.gui import Ui_MainWindow
 import lib.profiler as pf
+import cProfile
 
 
 
@@ -17,7 +18,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 if __name__ == "__main__":    
     
     if not sys.stdin.isatty():
+        pr = cProfile.Profile()
+        pr.enable()
         pf.Profiler(sys.stdin)
+        pr.disable()
+        pr.print_stats()
     else:
         app = QtWidgets.QApplication(sys.argv)
         window = MainWindow()

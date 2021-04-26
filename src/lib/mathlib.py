@@ -93,6 +93,11 @@ def exp(a, b):
 def root(a, b):
     return a ** (1/float(b))
 
+def arith_average(sum,list):
+    return sum / len(list)
+
+def list_len(list):
+    return len(list)
 
 def fact(n):
     n = int(n)
