@@ -114,18 +114,22 @@ class EventHandler():
     # add math Functions to the stack
     def addExp(self):
         math.Symbol(math.SymbolType.EXP,0, '^')
+        math.Symbol(math.SymbolType.LEFT_BRACKET, '(', '(')
         self.UpdateDisplay()
 
     def addNthRoot(self):
-        math.Symbol(math.SymbolType.ROOT,0, '√')
+        math.Symbol(math.SymbolType.ROOT,0, 'ˣ√')
+        math.Symbol(math.SymbolType.LEFT_BRACKET, '(', '(')
         self.UpdateDisplay()
 
     def addFactorial(self):
         math.Symbol(math.SymbolType.FACTORIAL,0, '!')
+        math.Symbol(math.SymbolType.LEFT_BRACKET, '(', '(')
         self.UpdateDisplay()
 
     def addRandom(self):
         math.Symbol(math.SymbolType.RANDOM,0, 'rand')
+        math.Symbol(math.SymbolType.LEFT_BRACKET, '(', '(')
         self.UpdateDisplay()
 
     # add math brackets to the stack
@@ -145,6 +149,10 @@ class EventHandler():
         math.Compute()
         self.UpdateDisplay()
 
+    def delChar(self):
+        if math.SymbolList:
+            math.SymbolList.pop()
+        self.UpdateDisplay()
 
     # set value from Symbol list to the calc display
     def UpdateDisplay(self):
@@ -187,7 +195,10 @@ class EventHandler():
         # commands
         Qt.Key_Escape : Clear,
         Qt.Key_Enter : Execute,
-        Qt.Key_Return : Execute
+        Qt.Key_Return : Execute,
+
+        # DEL -> backspace
+        Qt.Key_Backspace : delChar
     }
 
     # key handler which perform actions upon entered multiple keys

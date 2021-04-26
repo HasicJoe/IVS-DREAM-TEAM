@@ -1,3 +1,4 @@
+
 class SymbolType():
     NUMBER =        0x10
     COMMA =         0x11
@@ -49,15 +50,14 @@ class TokenType():
 # list of tokens to be computed
 TokenList = []
 class Token():
-
     #constructor
     def __init__(self, type, value):
         self.type = type
         self.value = value
-    # operations
 
-# translate symbol list into list of tokens
+# translate symbols into tokens
 def PopulateTokens():
+    TokenList.clear()
     numberBuffer = ''
     for symb in SymbolList:
         if symb.type in [SymbolType.COMMA, SymbolType.NUMBER]:
@@ -74,6 +74,7 @@ def Compute():
     PopulateTokens()
     print([token.value for token in TokenList])
 
+
 def add(a, b):
     return a + b
 
@@ -88,3 +89,11 @@ def divide(a, b):
 
 def exp(a, b):
     return a ** b
+
+def root(a, b):
+    return a ** (1/float(b))
+
+
+def fact(n):
+    n = int(n)
+    return float(1) if n == 1 or n == 0 else float(n * fact(n-1))
