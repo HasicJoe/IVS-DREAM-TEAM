@@ -40,7 +40,7 @@ class Profiler():
             self.in_br += ml.exp(i,2)
         
         self.in_br -= ml.list_len(self.numbers) * ml.exp(self.arith_avg,2)
-        self.before_br = ml.divide(1,ml.list_len(self.numbers)-1)
+        self.before_br = ml.div(1,ml.list_len(self.numbers)-1)
         self.std_dev = ml.root(ml.multiply(self.before_br,self.in_br),2)
         pr.disable()
         pr.print_stats()
