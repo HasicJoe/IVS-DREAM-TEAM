@@ -19,10 +19,7 @@ if __name__ == "__main__":
     
     if not sys.stdin.isatty():
         pr = cProfile.Profile()
-        pr.enable()
-        pf.Profiler(sys.stdin)
-        pr.disable()
-        pr.print_stats()
+        pf.Profiler(sys.stdin,pr)
     else:
         app = QtWidgets.QApplication(sys.argv)
         window = MainWindow()
