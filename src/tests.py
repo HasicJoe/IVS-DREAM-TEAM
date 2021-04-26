@@ -34,7 +34,7 @@ def test_add_negative():
     assert add(-1,0) == -1
     assert add(-1,-3) == -4
     assert add(1,-3) == -2
-    assert add(-100,3) == 97
+    assert add(-100,3) == -97
 
 
 
