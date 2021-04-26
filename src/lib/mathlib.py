@@ -72,7 +72,10 @@ def PopulateTokens():
 
 def Compute():
     PopulateTokens()
+
     print([token.value for token in TokenList])
+
+def 
 
 
 def add(a, b):
@@ -95,5 +98,7 @@ def root(a, b):
 
 
 def fact(n):
+    if n < 0:
+        raise ValueError
     n = int(n)
     return float(1) if n == 1 or n == 0 else float(n * fact(n-1))
