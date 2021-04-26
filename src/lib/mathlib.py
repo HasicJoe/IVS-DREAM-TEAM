@@ -81,13 +81,13 @@ def Compute():
 def add(a, b):
     return a + b
 
-def substract(a, b):
+def sub(a, b):
     return a - b
 
-def multiply(a, b):
+def mul(a, b):
     return a * b
 
-def divide(a, b):
+def div(a, b):
     return a / b
 
 def exp(a, b):
@@ -98,6 +98,15 @@ def root(a, b):
 
 def rand(n):
     return random.random()*n
+    
+def arith_average(sum,list):
+    return sum / len(list)
+
+def list_len(list):
+    return len(list)
+
+def mod(a,b):
+    return a % b
 
 def fact(n):
     if n < 0:

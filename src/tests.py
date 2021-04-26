@@ -1,7 +1,7 @@
 import pytest
 import random
 import math
-from lol import *
+from lib.mathlib import *
 
 
 
@@ -34,7 +34,7 @@ def test_add_negative():
     assert add(-1,0) == -1
     assert add(-1,-3) == -4
     assert add(1,-3) == -2
-    assert add(-100,3) == 97
+    assert add(-100,3) == -97
 
 
 
@@ -133,7 +133,7 @@ def test_fact_zero():
     assert fact(0) == 1
 
 def test_fact_negative():
-    with pytest.raises(TypeError):
+    with pytest.raises(ValueError):
         fact(-1)
         fact(-8)
 
