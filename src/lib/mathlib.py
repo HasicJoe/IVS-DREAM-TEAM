@@ -94,11 +94,11 @@ def exp(a, b):
     return a ** b
 
 def root(a, b):
-    return a ** (1/float(b))
+    return b ** (1/float(a))
 
 def rand(n):
     return random.random()*n
-    
+
 def arith_average(sum,list):
     return sum / len(list)
 
