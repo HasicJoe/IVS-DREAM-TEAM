@@ -133,7 +133,7 @@ def test_fact_zero():
     assert fact(0) == 1
 
 def test_fact_negative():
-    with pytest.raises(TypeError):
+    with pytest.raises(ValueError):
         fact(-1)
         fact(-8)
 
