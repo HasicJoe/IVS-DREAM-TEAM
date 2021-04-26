@@ -78,17 +78,24 @@ def Compute():
     if SymbolList:
         PSA(PopulateTokens())
 
-PrecedenceSyntaxTable = {         #   +    -    *     /   (    )    i    $
-    TokenType.OPERATION_ADD :       [">", ">", "<", "<", "<", ">", "<", ">"],
-    TokenType.OPERATION_SUBSTRACT : [">", ">", "<", "<", "<", ">", "<", ">"],
-    TokenType.OPERATION_MULTIPLY :  [">", ">", ">", ">", "<", ">", "<", ">"],
-    TokenType.OPERATION_DIVIDE :    [">", ">", ">", ">", "<", ">", "<", ">"],
-    TokenType.LEFT_BRACKET :        ["<", "<", "<", "<", "<", "S", "S", "S"],
-    TokenType.RIGHT_BRACKET :       [">", ">", ">", ">", "S", ">", ">", ">"],
-    TokenType.NUMBER :              [">", ">", ">", ">", "S", ">", "S", ">"],
-    TokenType.DOLLAR :              ["<", "<", "<", "<", "<", "S", "<", "S"]
+PrecedenceSyntaxTable = {         #   +    -    *     /   %    ^    √    !    R    (    )    i    $
+    TokenType.OPERATION_ADD :       [">", ">", "<", "<", "<", "<", "<", "<", "<", "<", ">", "<", ">"],
+    TokenType.OPERATION_SUBSTRACT : [">", ">", "<", "<", "<", "<", "<", "<", "<", "<", ">", "<", ">"],
+    TokenType.OPERATION_MULTIPLY :  [">", ">", ">", ">", ">", "<", "<", "<", "<", "<", ">", "<", ">"],
+    TokenType.OPERATION_DIVIDE :    [">", ">", ">", ">", ">", "<", "<", "<", "<", "<", ">", "<", ">"],
+    TokenType.OPERATION_MODULO :    [">", ">", ">", ">", ">", "<", "<", "<", "<", "<", ">", "<", ">"],
+    TokenType.OPERATION_EXP :       [">", ">", ">", ">", ">", "<", "<", "<", "<", "<", ">", "<", ">"],
 
-    #TODO: add remaining operations
+    TokenType.FUNCTION_ROOT :       [">", ">", ">", ">", ">", ">", ">", "<", "<", "<", ">", "<", ">"],
+    TokenType.FUNCTION_FACTORIAL :  [">", ">", ">", ">", ">", ">", ">", ">", ">", "<", ">", "<", ">"],
+    TokenType.FUNCTION_RAND :       [">", ">", ">", ">", ">", ">", ">", ">", ">", "<", ">", "<", ">"],
+
+    TokenType.LEFT_BRACKET :        ["<", "<", "<", "<", "<", "<", "<", "<", "<", "<", "=", "<", "S"],
+    TokenType.RIGHT_BRACKET :       [">", ">", ">", ">", ">", ">", ">", ">", ">", "S", ">", ">", ">"],
+    
+    TokenType.NUMBER :              [">", ">", ">", ">", ">", ">", ">", ">", ">", "S", ">", "S", ">"],
+    
+    TokenType.DOLLAR :              ["<", "<", "<", "<", "<", "<", "<", "<", "<", "<", "S", "<", "S"]
 }
 
 def toNonTerminal(tokenlist):
@@ -98,51 +105,72 @@ def removeBrackets(tokenlist):
     return Token(TokenType.NON_TERMINAL, tokenlist[1].value)
 
 def addTokens(tokenlist):
-    return Token(TokenType.NON_TERMINAL, add(tokenlist[2].value, tokenlist[0].value))
+    return Token(TokenType.NON_TERMINAL, add(tokenlist[0].value, tokenlist[2].value))
 
 def substractTokens(tokenlist):
-    return Token(TokenType.NON_TERMINAL, sub(tokenlist[2].value, tokenlist[0].value))
+    return Token(TokenType.NON_TERMINAL, sub(tokenlist[0].value, tokenlist[2].value))
 
 def multiplyTokens(tokenlist):
-    return Token(TokenType.NON_TERMINAL, mul(tokenlist[2].value, tokenlist[0].value))
+    return Token(TokenType.NON_TERMINAL, mul(tokenlist[0].value, tokenlist[2].value))
 
 def divideTokens(tokenlist):
-    return Token(TokenType.NON_TERMINAL, div(tokenlist[2].value, tokenlist[0].value))
+    return Token(TokenType.NON_TERMINAL, div(tokenlist[0].value, tokenlist[2].value))
+
+def moduloTokens(tokenlist):
+    return Token(TokenType.NON_TERMINAL, mod(tokenlist[0].value, tokenlist[2].value))
+
+def expTokens(tokenlist):
+    return Token(TokenType.NON_TERMINAL, exp(tokenlist[0].value, tokenlist[2].value))
+
+def factToken(tokenlist):
+    return Token(TokenType.NON_TERMINAL, fact(tokenlist[0].value))
+
+def randToken(tokenlist):
+    return Token(TokenType.NON_TERMINAL, rand(tokenlist[1].value))
+
+def rootTokens(tokenlist):
+    return Token(TokenType.NON_TERMINAL, root(tokenlist[0].value, tokenlist[2].value))
 
 Grammar = {
     (TokenType.NUMBER,) : toNonTerminal,
-    (TokenType.LEFT_BRACKET, TokenType.NON_TERMINAL, TokenType.RIGHT_BRACKET,) : toNonTerminal,
+    (TokenType.LEFT_BRACKET, TokenType.NON_TERMINAL, TokenType.RIGHT_BRACKET,) : removeBrackets,
     (TokenType.NON_TERMINAL, TokenType.OPERATION_ADD, TokenType.NON_TERMINAL,) : addTokens,
     (TokenType.NON_TERMINAL, TokenType.OPERATION_SUBSTRACT, TokenType.NON_TERMINAL,) : substractTokens,
     (TokenType.NON_TERMINAL, TokenType.OPERATION_MULTIPLY, TokenType.NON_TERMINAL,) : multiplyTokens,
-    (TokenType.NON_TERMINAL, TokenType.OPERATION_DIVIDE, TokenType.NON_TERMINAL,) : divideTokens
-
-    #TODO: add remaining operations
+    (TokenType.NON_TERMINAL, TokenType.OPERATION_DIVIDE, TokenType.NON_TERMINAL,) : divideTokens,
+    (TokenType.NON_TERMINAL, TokenType.OPERATION_MODULO, TokenType.NON_TERMINAL,) : moduloTokens,
+    (TokenType.NON_TERMINAL, TokenType.OPERATION_EXP, TokenType.NON_TERMINAL,) : expTokens,
+    (TokenType.NON_TERMINAL, TokenType.FUNCTION_FACTORIAL,) : factToken,
+    (TokenType.FUNCTION_RAND, TokenType.NON_TERMINAL,) : randToken,
+    (TokenType.NON_TERMINAL, TokenType.FUNCTION_ROOT, TokenType.NON_TERMINAL,) : rootTokens,
 }
-
 # for debugging purposes
 typeToTableMap = {
     TokenType.OPERATION_ADD :       0,
     TokenType.OPERATION_SUBSTRACT : 1,
     TokenType.OPERATION_MULTIPLY :  2,
     TokenType.OPERATION_DIVIDE :    3,
-    TokenType.LEFT_BRACKET :        4,
-    TokenType.RIGHT_BRACKET :       5,
-    TokenType.NUMBER :              6,
-    TokenType.DOLLAR :              7
+    TokenType.OPERATION_MODULO :    4,
+    TokenType.OPERATION_EXP :       5,
+    TokenType.FUNCTION_ROOT :       6,
+    TokenType.FUNCTION_FACTORIAL :  7,
+    TokenType.FUNCTION_RAND :       8,
+    TokenType.LEFT_BRACKET :        9,
+    TokenType.RIGHT_BRACKET :       10,
+    TokenType.NUMBER :              11,
+    TokenType.DOLLAR :              12
 }
 
+# Precedence Syntax Analysis
 def PSA(tokens):
-
     # temporary list for reduce operation
     templist = []    
     # add a '$' to the end of input
     tokens.append(Token(TokenType.DOLLAR, '$'))
-
-    # stack holding the expression evaluation
+    # stack holding the expression evaluation, add '$' at the bottom of the stack
     Stack = [Token(TokenType.DOLLAR, '$')]
-    while(1):
-        # ending condition
+    while(True):
+        # ending condition (successfull evaluation)
         if len(tokens) == 1 and tokens[0].type == TokenType.DOLLAR and len(Stack) == 2 and Stack[1].type == TokenType.NON_TERMINAL:
             print(Stack[1].value)
             return
@@ -150,7 +178,9 @@ def PSA(tokens):
             for StackTok in Stack[::-1]:
                 if StackTok.type != TokenType.NON_TERMINAL and StackTok.type != TokenType.SHIFT:
                     break
+            #print('stack',StackTok.value, 'input', tokens[0].value)
             operation = PrecedenceSyntaxTable[StackTok.type][typeToTableMap[tokens[0].type]]
+            #print("operation",operation)
         except KeyError:
             print('PRECEDENCE SYNTAX TABLE NO OPERATION')
             return
@@ -163,23 +193,26 @@ def PSA(tokens):
             else:
                 Stack.append(Token(TokenType.SHIFT, '<'))
             Stack.append(tokens.pop(0))
-            print('stack after shift; ', [tok.value for tok in Stack])
+            #  print('stack after shift; ', [tok.value for tok in Stack])
         # operation reduce
-        elif operation == ">":
+        elif operation == ">" or operation == "=":
+            if operation == "=":
+                Stack.append(tokens.pop(0))
+                # print('stack before reduce;',[tok.value for tok in Stack])
             templist.clear()
             while Stack[-1].type != TokenType.SHIFT:
                 templist.append(Stack.pop())
             try:
+                templist = templist[::-1]
                 action = Grammar[tuple([tok.type for tok in templist])]
             except KeyError:
                 print('NON EXISTING GRAMMAR RULE')
                 return
-            else:
-                
+            else:          
                 if Stack[-1].type == TokenType.SHIFT:
                     Stack.pop()
                 Stack.append(action(templist))
-                print('stack after reduce;', [tok.value for tok in Stack])
+                # print('stack after reduce;', [tok.value for tok in Stack])
         # syntax err
         else:
             print('SYNTAX ERR no operation in precedence table for this expression')
