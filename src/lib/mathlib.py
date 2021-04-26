@@ -250,7 +250,10 @@ def mod(a,b):
     return a % b
 
 def fact(n):
+    n = int(n)
     if n < 0:
         raise ValueError
-    n = int(n)
-    return float(1) if n == 1 or n == 0 else float(n * fact(n-1))
+    result = 1
+    for i in range(n):
+        result *= (i+1)
+    return result
