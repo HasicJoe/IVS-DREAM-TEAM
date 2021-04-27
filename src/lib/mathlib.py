@@ -1,22 +1,22 @@
 import random 
 
 class SymbolType():
-    NUMBER =        0x10
+    NUMBER =        0x0B
     COMMA =         0x11
     
-    PLUS =          0x20
-    MINUS =         0x21
-    MULTIPLY =      0x22
-    DIVIDE =        0x23
-    MODULO =        0x24
-    EXP =           0x25
+    PLUS =          0x00
+    MINUS =         0x01
+    MULTIPLY =      0x02
+    DIVIDE =        0x03
+    MODULO =        0x04
+    EXP =           0x05
     
-    LEFT_BRACKET =  0x30
-    RIGHT_BRACKET = 0x31
+    LEFT_BRACKET =  0x09
+    RIGHT_BRACKET = 0x0A
 
-    RANDOM =        0x40
-    FACTORIAL =     0x41
-    ROOT =          0x42     
+    RANDOM =        0x08
+    FACTORIAL =     0x07
+    ROOT =          0x06    
 
 # list of entered symbols
 SymbolList = []
@@ -26,28 +26,27 @@ class Symbol():
         self.value = value
         self.display = display
         SymbolList.append(self)
-        #print([symb.display for symb in SymbolList])
 
 # types of tokens to provide execution
 class TokenType():
-    NUMBER =                0x10
+    NUMBER =                0x0B
     # operations
-    OPERATION_ADD =         0x20
-    OPERATION_SUBSTRACT =   0x21
-    OPERATION_MULTIPLY =    0x22
-    OPERATION_DIVIDE =      0x23
-    OPERATION_MODULO =      0x24
-    OPERATION_EXP =         0x25
+    OPERATION_ADD =         0x00
+    OPERATION_SUBSTRACT =   0x01
+    OPERATION_MULTIPLY =    0x02
+    OPERATION_DIVIDE =      0x03
+    OPERATION_MODULO =      0x04
+    OPERATION_EXP =         0x05
     # brackets
-    LEFT_BRACKET =          0x30
-    RIGHT_BRACKET =         0x31
+    LEFT_BRACKET =          0x09
+    RIGHT_BRACKET =         0x0A
     # functions
-    FUNCTION_RAND =         0x40
-    FUNCTION_FACTORIAL =    0x41
-    FUNCTION_ROOT =         0x42
+    FUNCTION_RAND =         0x08
+    FUNCTION_FACTORIAL =    0x07
+    FUNCTION_ROOT =         0x06
 
     # for syntax analysis
-    DOLLAR =                0x50
+    DOLLAR =                0x0C
     NON_TERMINAL =          0x51
     SHIFT =                 0x52
 
@@ -70,6 +69,7 @@ def PopulateTokens(eventhandler):
         if SymbolList[i].type in [SymbolType.NUMBER, SymbolType.COMMA]:
             # there is minus before the number
             if i > 0 and SymbolList[i-1].type == SymbolType.MINUS:
+                # add minus as unary minus operation (include in token)
                 if i == 1 or (i > 1 and SymbolList[i-2].type in [
                     SymbolType.LEFT_BRACKET,
                     SymbolType.MINUS, 
@@ -96,7 +96,6 @@ def PopulateTokens(eventhandler):
 
 def Compute(eventhandler):
     if SymbolList:
-        #print([tok.value for tok in PopulateTokens()])
         PSA(PopulateTokens(eventhandler), eventhandler)
 
 PrecedenceSyntaxTable = {         #   +    -    *     /   %    ^    √    !    R    (    )    i    $
@@ -153,33 +152,17 @@ def rootTokens(tokenlist):
     return Token(TokenType.NON_TERMINAL, root(tokenlist[0].value, tokenlist[2].value))
 
 Grammar = {
-    (TokenType.NUMBER,) : toNonTerminal,
-    (TokenType.LEFT_BRACKET, TokenType.NON_TERMINAL, TokenType.RIGHT_BRACKET,) : removeBrackets,
-    (TokenType.NON_TERMINAL, TokenType.OPERATION_ADD, TokenType.NON_TERMINAL,) : addTokens,
-    (TokenType.NON_TERMINAL, TokenType.OPERATION_SUBSTRACT, TokenType.NON_TERMINAL,) : substractTokens,
-    (TokenType.NON_TERMINAL, TokenType.OPERATION_MULTIPLY, TokenType.NON_TERMINAL,) : multiplyTokens,
-    (TokenType.NON_TERMINAL, TokenType.OPERATION_DIVIDE, TokenType.NON_TERMINAL,) : divideTokens,
-    (TokenType.NON_TERMINAL, TokenType.OPERATION_MODULO, TokenType.NON_TERMINAL,) : moduloTokens,
-    (TokenType.NON_TERMINAL, TokenType.OPERATION_EXP, TokenType.NON_TERMINAL,) : expTokens,
-    (TokenType.NON_TERMINAL, TokenType.FUNCTION_FACTORIAL,) : factToken,
-    (TokenType.FUNCTION_RAND, TokenType.NON_TERMINAL,) : randToken,
-    (TokenType.NON_TERMINAL, TokenType.FUNCTION_ROOT, TokenType.NON_TERMINAL,) : rootTokens,
-}
-# for debugging purposes
-typeToTableMap = {
-    TokenType.OPERATION_ADD :       0,
-    TokenType.OPERATION_SUBSTRACT : 1,
-    TokenType.OPERATION_MULTIPLY :  2,
-    TokenType.OPERATION_DIVIDE :    3,
-    TokenType.OPERATION_MODULO :    4,
-    TokenType.OPERATION_EXP :       5,
-    TokenType.FUNCTION_ROOT :       6,
-    TokenType.FUNCTION_FACTORIAL :  7,
-    TokenType.FUNCTION_RAND :       8,
-    TokenType.LEFT_BRACKET :        9,
-    TokenType.RIGHT_BRACKET :       10,
-    TokenType.NUMBER :              11,
-    TokenType.DOLLAR :              12
+    (TokenType.NUMBER,) :                                                               toNonTerminal,
+    (TokenType.LEFT_BRACKET, TokenType.NON_TERMINAL, TokenType.RIGHT_BRACKET,) :        removeBrackets,
+    (TokenType.NON_TERMINAL, TokenType.OPERATION_ADD, TokenType.NON_TERMINAL,) :        addTokens,
+    (TokenType.NON_TERMINAL, TokenType.OPERATION_SUBSTRACT, TokenType.NON_TERMINAL,) :  substractTokens,
+    (TokenType.NON_TERMINAL, TokenType.OPERATION_MULTIPLY, TokenType.NON_TERMINAL,) :   multiplyTokens,
+    (TokenType.NON_TERMINAL, TokenType.OPERATION_DIVIDE, TokenType.NON_TERMINAL,) :     divideTokens,
+    (TokenType.NON_TERMINAL, TokenType.OPERATION_MODULO, TokenType.NON_TERMINAL,) :     moduloTokens,
+    (TokenType.NON_TERMINAL, TokenType.OPERATION_EXP, TokenType.NON_TERMINAL,) :        expTokens,
+    (TokenType.NON_TERMINAL, TokenType.FUNCTION_FACTORIAL,) :                           factToken,
+    (TokenType.FUNCTION_RAND, TokenType.NON_TERMINAL,) :                                randToken,
+    (TokenType.NON_TERMINAL, TokenType.FUNCTION_ROOT, TokenType.NON_TERMINAL,) :        rootTokens,
 }
 
 # Precedence Syntax Analysis
@@ -209,9 +192,7 @@ def PSA(tokens, eventhandler):
             for StackTok in Stack[::-1]:
                 if StackTok.type != TokenType.NON_TERMINAL and StackTok.type != TokenType.SHIFT:
                     break
-            #print('stack',StackTok.value, 'input', tokens[0].value)
-            operation = PrecedenceSyntaxTable[StackTok.type][typeToTableMap[tokens[0].type]]
-            #print("operation",operation)
+            operation = PrecedenceSyntaxTable[StackTok.type][tokens[0].type]
         except KeyError:
             eventhandler.window.label.setText('SYNTAX ERROR')
             return
@@ -224,12 +205,10 @@ def PSA(tokens, eventhandler):
             else:
                 Stack.append(Token(TokenType.SHIFT, '<'))
             Stack.append(tokens.pop(0))
-            #  print('stack after shift; ', [tok.value for tok in Stack])
         # operation reduce
         elif operation == ">" or operation == "=":
             if operation == "=":
                 Stack.append(tokens.pop(0))
-                # print('stack before reduce;',[tok.value for tok in Stack])
             templist.clear()
             while Stack[-1].type != TokenType.SHIFT:
                 templist.append(Stack.pop())
@@ -247,7 +226,6 @@ def PSA(tokens, eventhandler):
                 except ValueError:
                     eventhandler.window.label.setText('MATH ERROR')
                     return
-                # print('stack after reduce;', [tok.value for tok in Stack])
         # syntax err
         else:
             eventhandler.window.label.setText('SYNTAX ERROR')
