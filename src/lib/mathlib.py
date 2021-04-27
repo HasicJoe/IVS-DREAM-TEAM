@@ -262,6 +262,8 @@ def list_len(list):
     return len(list)
 
 def mod(a,b):
+    if int(a) != a or int(b) != b:
+        raise TypeError
     return a % b
 
 def fact(n):
