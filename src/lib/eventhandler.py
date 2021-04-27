@@ -145,8 +145,8 @@ class EventHandler():
         self.window.label.setText('0,000')
 
     def Execute(self):
-        math.Compute()
-        self.UpdateDisplay()
+        math.Compute(self)
+        #self.UpdateDisplay()
 
     def delChar(self):
         if math.SymbolList:

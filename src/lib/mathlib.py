@@ -16,7 +16,7 @@ class SymbolType():
 
     RANDOM =        0x40
     FACTORIAL =     0x41
-    ROOT =          0x42       
+    ROOT =          0x42     
 
 # list of entered symbols
 SymbolList = []
@@ -59,24 +59,45 @@ class Token():
         self.value = value
 
 # translate symbols into tokens
-def PopulateTokens():
-    TokenList = []
-    numberBuffer = ''
-    for symb in SymbolList:
-        if symb.type in [SymbolType.COMMA, SymbolType.NUMBER]:
-            numberBuffer+=str(symb.value)
+# handle unary minus in token conversion to prove pista, that it wont actually break anything
+def PopulateTokens(eventhandler):
+    indexlist = []
+    result = []
+    i = 0
+    numBuff = ''
+    while i < len(SymbolList):
+        # switching to number token
+        if SymbolList[i].type in [SymbolType.NUMBER, SymbolType.COMMA]:
+            # there is minus before the number
+            if i > 0 and SymbolList[i-1].type == SymbolType.MINUS:
+                if i == 1 or (i > 1 and SymbolList[i-2].type in [
+                    SymbolType.LEFT_BRACKET,
+                    SymbolType.MINUS, 
+                    SymbolType.PLUS, 
+                    SymbolType.MULTIPLY, 
+                    SymbolType.DIVIDE,
+                    SymbolType.MODULO]):
+                    numBuff = '-'
+                    result.pop()
+            while i < len(SymbolList) and SymbolList[i].type in [SymbolType.NUMBER, SymbolType.COMMA]:
+                numBuff += str(SymbolList[i].value)
+                i+=1
+            try:
+                result.append(Token(TokenType.NUMBER, float(numBuff)))
+            except ValueError:
+                eventhandler.window.label.setText('SYNTAX ERROR')
+                return
+            i-=1
+            numBuff = ''
         else:
-            if numberBuffer:
-                TokenList.append(Token(TokenType.NUMBER, float(numberBuffer)))
-                numberBuffer = ''
-            TokenList.append(Token(symb.type, symb.value))
-    if numberBuffer:
-        TokenList.append(Token(TokenType.NUMBER, float(numberBuffer)))
-    return TokenList
+            result.append(Token(SymbolList[i].type, SymbolList[i].value))
+        i += 1
+    return result
 
-def Compute():
+def Compute(eventhandler):
     if SymbolList:
-        PSA(PopulateTokens())
+        #print([tok.value for tok in PopulateTokens()])
+        PSA(PopulateTokens(eventhandler), eventhandler)
 
 PrecedenceSyntaxTable = {         #   +    -    *     /   %    ^    √    !    R    (    )    i    $
     TokenType.OPERATION_ADD :       [">", ">", "<", "<", "<", "<", "<", "<", "<", "<", ">", "<", ">"],
@@ -162,7 +183,10 @@ typeToTableMap = {
 }
 
 # Precedence Syntax Analysis
-def PSA(tokens):
+def PSA(tokens, eventhandler):
+    # error occured while translating symbols
+    if not tokens:
+        return
     # temporary list for reduce operation
     templist = []    
     # add a '$' to the end of input
@@ -172,7 +196,14 @@ def PSA(tokens):
     while(True):
         # ending condition (successfull evaluation)
         if len(tokens) == 1 and tokens[0].type == TokenType.DOLLAR and len(Stack) == 2 and Stack[1].type == TokenType.NON_TERMINAL:
-            print(Stack[1].value)
+            SymbolList.clear()
+            result = Stack.pop()
+            for sym in list(str(result.value)):
+                if sym == '.' or sym == ',':
+                    Symbol(SymbolType.COMMA, '.',',')
+                else:
+                    Symbol(SymbolType.NUMBER, sym, sym)
+            eventhandler.UpdateDisplay()
             return
         try:
             for StackTok in Stack[::-1]:
@@ -182,7 +213,7 @@ def PSA(tokens):
             operation = PrecedenceSyntaxTable[StackTok.type][typeToTableMap[tokens[0].type]]
             #print("operation",operation)
         except KeyError:
-            print('PRECEDENCE SYNTAX TABLE NO OPERATION')
+            eventhandler.window.label.setText('SYNTAX ERROR')
             return
         # operation shift
         if operation == "<":
@@ -206,16 +237,20 @@ def PSA(tokens):
                 templist = templist[::-1]
                 action = Grammar[tuple([tok.type for tok in templist])]
             except KeyError:
-                print('NON EXISTING GRAMMAR RULE')
+                eventhandler.window.label.setText('SYNTAX ERROR')
                 return
             else:          
                 if Stack[-1].type == TokenType.SHIFT:
                     Stack.pop()
-                Stack.append(action(templist))
+                try:
+                    Stack.append(action(templist))
+                except ValueError:
+                    eventhandler.window.label.setText('MATH ERROR')
+                    return
                 # print('stack after reduce;', [tok.value for tok in Stack])
         # syntax err
         else:
-            print('SYNTAX ERR no operation in precedence table for this expression')
+            eventhandler.window.label.setText('SYNTAX ERROR')
             return
 
 
