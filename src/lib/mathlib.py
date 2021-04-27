@@ -250,6 +250,8 @@ def exp(a, b):
 def root(a, b):
     if a % 2 == 0 and b < 0:
         raise ValueError
+    if a == 0:
+       raise ValueError
     return b ** (1/float(a))
 
 def rand(n):
