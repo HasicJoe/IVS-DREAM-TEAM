@@ -1,1 +1,4 @@
-tento soubor bude obsahovat rozdil mezi planem projektu a skutecnosti
+xgajdo30 (testy, dokumentácia)
+xgaven08 (matematická knižnica, zostavenie programu, inštalátor)
+xhatal01 (testy, užívaťelská príručka)
+xvalas10 (GUI, profiling)
