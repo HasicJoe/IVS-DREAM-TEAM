@@ -1,3 +1,11 @@
+
+"""@brief Main for start of aplication
+   
+   @author IVS-DREAM-TEAM
+   
+   @file main.py
+"""
+
 import sys
 import lib.eventhandler as eh
 from PyQt5 import QtWidgets, QtCore, uic
@@ -11,6 +19,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setupUi(self)
 
 def main():   
+    """
+    Aplication run
+    """    
     app = QtWidgets.QApplication(sys.argv)
     window = MainWindow()
     window.show()

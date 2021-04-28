@@ -1,3 +1,14 @@
+
+"""@brief code for calculating standard deviation 
+   
+   @author IVS-DREAM-TEAM
+   
+   @file profiler.py
+"""
+
+
+
+
 import re
 import lib.mathlib as ml
 import cProfile
