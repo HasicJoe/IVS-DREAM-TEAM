@@ -224,7 +224,7 @@ def PSA(tokens, eventhandler):
                     Stack.pop()
                 try:
                     Stack.append(action(templist))
-                except ValueError:
+                except:
                     eventhandler.window.label.setText('MATH ERROR')
                     return
         # syntax err
@@ -249,6 +249,10 @@ def exp(a, b):
     return a ** b
 
 def root(a, b):
+    if a % 2 == 0 and b < 0:
+        raise ValueError
+    if a == 0:
+       raise ValueError
     return b ** (1/float(a))
 
 def rand(n):
@@ -261,9 +265,13 @@ def list_len(list):
     return len(list)
 
 def mod(a,b):
+    if int(a) != a or int(b) != b:
+        raise TypeError
     return a % b
 
 def fact(n):
+    if n != int(n):
+        raise TypeError
     n = int(n)
     if n < 0:
         raise ValueError
