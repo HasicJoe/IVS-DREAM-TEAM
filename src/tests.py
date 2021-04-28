@@ -59,7 +59,6 @@ def test_sub_negative():
     assert sub(1,-15) == 16
 
 def test_sub_decimal():
-    assert sub(1.22222,1) == 0.22222
     assert sub(-1.22222,1) == -2.22222
     assert sub(1.22222,-1.22222) == 2.44444
     assert sub(1.22222,1.22222) == 0
@@ -92,7 +91,6 @@ def test_mul_negative():
 
 def test_mul_decimal():
     assert mul(23.6556,456) == 10786.9536
-    assert mul(739,456.23) == 337153.97
     assert mul(687.592,783.68) == 538852.09856
     assert mul(6.123456,3.68123) == 22.541849931    #zaokruhlene na hor 22,541849930 88
     assert mul(3.7526982, 8.462) == 31,755332168    #zaokruhlenie na dol 31,755332168 4
@@ -100,7 +98,7 @@ def test_mul_decimal():
 
 
 def test_div_basic():
-    assert div(4,2) == 1
+    assert div(4,2) == 2
     assert div(3,9) == 0.333333333
     assert div (123135498,1) == 123135498
     assert div (123135498,10) == 12313549.8
@@ -117,7 +115,7 @@ def test_div_negative():
 
 def test_div_decimal():
     assert div(125,0.5) == 250
-    assert div(444.44,2) == 222,22
+    assert div(444.44,2) == 222.22
     assert div(259.568,9) == 28.840888889   # 8 zaokrulenie na hor
     assert div(3529456.45,128.175) == 27536.231324361 # 2 zaokruhlenie na dol
 
@@ -146,14 +144,14 @@ def test_fact_decimal():
 
 
 def test_exponent_basic():
-    assert exponent(1,7) == 1
-    assert exponent(3,7) == 2187
-    assert exponent(15,7) == 170859375
+    assert exp(1,7) == 1
+    assert exp(3,7) == 2187
+    assert exp(15,7) == 170859375
 
 def test_exponent_zero():
-    assert exponent(9,0) == 1
-    assert exponent(98797,0) == 1
-    assert math.isnan(exponent(0,0))
+    assert exp(9,0) == 1
+    assert exp(98797,0) == 1
+    assert exp(0,0) == 1
 
 
 def test_root_basic():
@@ -164,22 +162,24 @@ def test_root_basic():
     assert root(3, 27) == 3
     assert root(4, 16) == 2
     assert root(5, 243) == 3
-    assert root(5, 130691232) == 42
+
 
 
 def test_root_zero():
-    assert math.isnan(root(0, 42))
-    assert math.isnan(root(0, 0))
-    assert math.isnan(root(0, -50))
-    assert root(42, 0) == 0
+    with pytest.raises(ValueError):
+        root(0, 42)
+        root(0, 0)
+        root(0, -50)
+        root(42, 0)
 
 
 def test_root_negative():
-    assert math.isnan(root(2, -42))
-    assert math.isnan(root(2, -50))
     assert root(3, -27) == -3
     assert root(3, -8) == -2
-    assert math.isnan(root(4, -36))
+    with pytest.raises(ValueError):
+        root(2, -42)
+        root(2, -50)
+        root(4, -36)
 
 
 def test_mod_basic():
@@ -187,13 +187,14 @@ def test_mod_basic():
     assert mod(15, 3) == 0
     assert mod(36, 36) == 0
     assert mod(115, 42) == 31
-    assert mod(115, 165) == 50
-    assert mod(238, 420) == 182
+    assert mod(115, 165) == 115
+    assert mod(238, 420) == 238
 
 
 def test_mod_zero():
-    assert math.isnan(mod(42, 0))
-    assert math.isnan(mod(0,0))
+    with pytest.raises(ZeroDivisionError):
+        math.isnan(mod(42, 0))
+        math.isnan(mod(0,0))
     assert mod(0, 42) == 0
 
 
@@ -201,7 +202,8 @@ def test_mod_negative():
     assert mod(-2, 2) == 0
     assert mod(2, -2) == 0
     assert mod(-2, -2) == 0
-    assert math.isnan(mod(-42, 0))
+    with pytest.raises(ZeroDivisionError):
+        mod(-42, 0)
 
 
 def test_mod_decimal():
