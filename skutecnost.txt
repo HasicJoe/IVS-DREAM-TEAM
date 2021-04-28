@@ -1,4 +1,13 @@
-xgajdo30 (testy, dokumentácia)
-xgaven08 (matematická knižnica, zostavenie programu, inštalátor)
-xhatal01 (testy, užívaťelská príručka)
-xvalas10 (GUI, profiling)
+xgajdo30 (testy, dokumentácia, debugging)
+xgaven08 (matematická knižnica, prepojenie GUI s knižnicou, inštalátor)
+xhatal01 (testy, užívaťelská príručka, Mockup)
+xvalas10 (GUI, profiling, prepojenie GUI s knižnicou)
+
+
+Oproti plánu sme boli cca týždeň v sklze, vzhľadom k tomu, že sme mali vela práce z 
+iných predmetov. Taktiež sme trošku prehodnotili rozdelenie práce vzhľadom k našim programátorským 
+skúsenostiam. Ako vedúci musím povedať, že som na svoj team hrdý, chlapci pracovali super spoľahlivo, a každý
+odviedol svoj kus práce.
+
+
+Teamleader (xgajdo30)
