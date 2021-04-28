@@ -144,7 +144,7 @@ class EventHandler():
         self.UpdateDisplay()
 
     def Help(self):
-        webbrowser.open('../User_manual.pdf')            
+        webbrowser.open('http://www.stud.fit.vutbr.cz/~xvalas10/User_manual.pdf')            
         
     def Clear(self):
         math.SymbolList.clear()

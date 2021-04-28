@@ -318,6 +318,8 @@ def root(a, b):
         raise ValueError
     if a == 0:
        raise ValueError
+    if a % 2 == 1 and b < 0:
+        return (abs(b) ** (1/float(a)))
     return b ** (1/float(a))
 
 def rand(n):
