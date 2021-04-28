@@ -149,7 +149,7 @@ class EventHandler():
         if sys.platform == 'linux':
             webbrowser.open('../User_manual.pdf')
         elif sys.platform == 'win32':
-            directory = op.path.abspath(os.path.dirname(__file__))
+            directory = os.path.abspath(os.path.dirname(__file__))
             webbrowser.open(os.path.abspath(directory + "/..User_manual.pdf/"))            
         
     def Clear(self):
