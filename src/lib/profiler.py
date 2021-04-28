@@ -16,12 +16,27 @@ class Profiler():
         parsed_data = []
         for line in data:
             parsed_data.append(re.split("\s+",line))
-            
         for line in parsed_data:
             for element in line:
-                if element.isdigit():
+                if self.is_int(element) or self.is_float(element):
                     self.numbers.append(float(element))
         self.start_profiling(pr)
+    
+    
+    def is_int(self,element):
+        try:
+            int(element)
+            return True
+        except:
+            return False
+        
+    
+    def is_float(self,element):
+        try:
+            float(element)
+            return True
+        except:
+            return False
     
     def start_profiling(self,pr):
         pr.enable()
@@ -41,8 +56,9 @@ class Profiler():
         
         self.in_br -= ml.list_len(self.numbers) * ml.exp(self.arith_avg,2)
         self.before_br = ml.div(1,ml.list_len(self.numbers)-1)
-        self.std_dev = ml.root(ml.mul(self.before_br,self.in_br),2)
+        self.std_dev = ml.root(2,ml.mul(self.before_br,self.in_br))
         pr.disable()
         pr.print_stats()
         print("Smerodatná odchylka: ",self.std_dev)
+        print("Počet vzoriek:",len(self.numbers))
         print("Aritmetický priemer: ",self.arith_avg)

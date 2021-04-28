@@ -1,0 +1,20 @@
+         29 function calls in 0.000 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        5    0.000    0.000    0.000    0.000 mathlib.py:236(add)
+        1    0.000    0.000    0.000    0.000 mathlib.py:242(mul)
+        1    0.000    0.000    0.000    0.000 mathlib.py:245(div)
+       11    0.000    0.000    0.000    0.000 mathlib.py:248(exp)
+        1    0.000    0.000    0.000    0.000 mathlib.py:251(root)
+        1    0.000    0.000    0.000    0.000 mathlib.py:261(arith_average)
+        2    0.000    0.000    0.000    0.000 mathlib.py:264(list_len)
+        1    0.000    0.000    0.000    0.000 mathlib.py:267(mod)
+        5    0.000    0.000    0.000    0.000 {built-in method builtins.len}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+
+Smerodatná odchylka:  5.54276304943863
+Počet vzoriek: 10
+Aritmetický priemer:  11.5

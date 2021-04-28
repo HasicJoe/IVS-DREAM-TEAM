@@ -3,9 +3,6 @@ import lib.eventhandler as eh
 from PyQt5 import QtWidgets, QtCore, uic
 from PyQt5.QtCore import Qt
 from gui.gui import Ui_MainWindow
-import lib.profiler as pf
-import cProfile
-
 
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
@@ -14,17 +11,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setupUi(self)
 
 def main():   
-    if not sys.stdin.isatty():
-        pr = cProfile.Profile()
-        pf.Profiler(sys.stdin,pr)
-    else:
-        app = QtWidgets.QApplication(sys.argv)
-        window = MainWindow()
-        window.show()
-        # bind event handler to the main window
-        eh.EventHandler(window)
-        app.exec()
+    app = QtWidgets.QApplication(sys.argv)
+    window = MainWindow()
+    window.show()
+    # bind event handler to the main window
+    eh.EventHandler(window)
+    app.exec()
 
 if __name__ == "__main__": 
     main()
-    exit(0)
+    sys.exit(0)
