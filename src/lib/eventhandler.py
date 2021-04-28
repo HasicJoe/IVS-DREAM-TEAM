@@ -2,6 +2,7 @@ from PyQt5 import QtWidgets, uic
 from PyQt5.QtCore import Qt
 import PyQt5.QtGui as gui
 import lib.mathlib as math
+import webbrowser
 
 class EventHandler():
     # bind mouse and keyboard events to the main window 
@@ -44,6 +45,8 @@ class EventHandler():
         # command buttons
         self.window.key_eq.clicked.connect(self.Execute)
         self.window.key_c.clicked.connect(self.Clear)
+        self.window.key_help.clicked.connect(self.Help)
+        
 
     # add Number symbols to stack
     def addNumberZero(self):
@@ -140,6 +143,9 @@ class EventHandler():
         math.Symbol(math.SymbolType.RIGHT_BRACKET, ')', ')')
         self.UpdateDisplay()
 
+    def Help(self):
+        webbrowser.open("../User_manual.pdf")
+        
     def Clear(self):
         math.SymbolList.clear()
         self.window.label.setText('0,000')
