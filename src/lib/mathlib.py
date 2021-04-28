@@ -249,7 +249,7 @@ def exp(a, b):
     return a ** b
 
 def root(a, b):
-    if a % 2 == 0 and b < 0:
+    if int(a) % 2 == 0 and b < 0:
         raise ValueError
     if a == 0:
        raise ValueError
