@@ -1,0 +1,12 @@
+main.py
+setup.py
+tests.py
+Riders_Poff_Calc.egg-info/PKG-INFO
+Riders_Poff_Calc.egg-info/SOURCES.txt
+Riders_Poff_Calc.egg-info/dependency_links.txt
+Riders_Poff_Calc.egg-info/requires.txt
+Riders_Poff_Calc.egg-info/top_level.txt
+gui/gui.py
+lib/eventhandler.py
+lib/mathlib.py
+lib/profiler.py
