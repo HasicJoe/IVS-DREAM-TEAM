@@ -2,8 +2,6 @@ from PyQt5 import QtWidgets, uic
 from PyQt5.QtCore import Qt
 import PyQt5.QtGui as gui
 import lib.mathlib as math
-import os
-import sys
 import webbrowser
 
 class EventHandler():
@@ -146,11 +144,7 @@ class EventHandler():
         self.UpdateDisplay()
 
     def Help(self):
-        if sys.platform == 'linux':
-            webbrowser.open('../User_manual.pdf')
-        elif sys.platform == 'win32':
-            directory = os.path.abspath(os.path.dirname(__file__))
-            webbrowser.open(os.path.abspath(directory + "/..User_manual.pdf/"))            
+        webbrowser.open('../User_manual.pdf')            
         
     def Clear(self):
         math.SymbolList.clear()
