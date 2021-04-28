@@ -1,3 +1,10 @@
+"""@brief Math library and token parsing 
+   
+   @author IVS-DREAM-TEAM
+   
+   @file mathlib.py
+"""
+
 import random 
 
 class SymbolType():
@@ -166,7 +173,7 @@ Grammar = {
 }
 
 # Precedence Syntax Analysis
-def PSA(tokens, eventhandler):
+def PSA(tokens, eventhandler): 
     # error occured while translating symbols
     if not tokens:
         return
@@ -234,42 +241,149 @@ def PSA(tokens, eventhandler):
 
 
 def add(a, b):
+    """Function for + operation
+
+    Args:
+        a (float): first argument
+        b (float): second argument
+
+    Returns:
+        (float): result of a + b
+    """    
     return a + b
 
 def sub(a, b):
+    """Function for - operation
+
+    Args:
+        a (float): first argument
+        b (float): second argument
+
+    Returns:
+        (float): result of a - b
+    """    
     return a - b
 
 def mul(a, b):
+    """Function for * operation
+
+    Args:
+        a (float): first argument
+        b (float): second argument
+
+    Returns:
+        (float): result of a * b
+    """    
     return a * b
 
 def div(a, b):
+    """Function for / operation
+
+    Args:
+        a (float): first argument
+        b (float): second argument
+
+    Returns:
+        (float): result of a / b
+    """    
     return a / b
 
 def exp(a, b):
+    """Function for ^ operation
+
+    Args:
+        a (float): first argument
+        b (float): second argument
+
+    Returns:
+        (float): result of a ^ b
+    """    
     return a ** b
 
 def root(a, b):
-    if int(a) % 2 == 0 and b < 0:
+    """Function for calculating n-th root
+
+    Args:
+        a (float): number of power of root
+        b (float): number from which the root is calculated
+
+    Raises:
+        ValueError: if root sould be complex number
+        ValueError: if power of root == 0
+
+    Returns:
+        (float): result of a-th root of b
+    """    
+    if a % 2 == 0 and b < 0:
         raise ValueError
     if a == 0:
        raise ValueError
     return b ** (1/float(a))
 
 def rand(n):
+    """function for returning random number
+
+    Args:
+        n (float): range of random number (0 - n)
+
+    Returns:
+        (float): random number
+    """    
     return random.random()*n
 
 def arith_average(sum,list):
+    """function for calculating of arithmetical average from list
+
+    Args:
+        sum (float): sum of all elements of list
+        list (list): list of elements
+
+    Returns:
+        (float): arithmetical average of elements of list
+    """    
     return sum / len(list)
 
 def list_len(list):
+    """function for calculating length of list
+
+    Args:
+        list (list): list which length is returned
+
+    Returns:
+        (int): number of elements of list
+    """    
     return len(list)
 
 def mod(a,b):
+    """function for calculating modulo
+
+    Args:
+        a (int): divided number
+        b (int): number to divide argumet a b
+
+    Raises:
+        TypeError: checks if argument is type int
+
+    Returns:
+        (int): result of operation a % b
+    """    
     if int(a) != a or int(b) != b:
         raise TypeError
     return a % b
 
 def fact(n):
+    """function for calculating factorial of given number
+
+    Args:
+        n (int): number of which factorial is calculated
+
+    Raises:
+        TypeError: checks if parameter N is of type int
+        ValueError: checks if parameter N is > than 0
+
+    Returns:
+        (int): n!
+    """    
     if n != int(n):
         raise TypeError
     n = int(n)
