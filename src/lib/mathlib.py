@@ -180,8 +180,9 @@ def PSA(tokens, eventhandler):
         # ending condition (successfull evaluation)
         if len(tokens) == 1 and tokens[0].type == TokenType.DOLLAR and len(Stack) == 2 and Stack[1].type == TokenType.NON_TERMINAL:
             SymbolList.clear()
-            result = Stack.pop()
-            for sym in list(str(result.value)):
+            # round the result for 8 decimal places
+            result = round(Stack.pop().value, 8)
+            for sym in list(str(result)):
                 if sym == '.' or sym == ',':
                     Symbol(SymbolType.COMMA, '.',',')
                 else:
