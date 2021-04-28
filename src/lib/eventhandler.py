@@ -3,6 +3,7 @@ from PyQt5.QtCore import Qt
 import PyQt5.QtGui as gui
 import lib.mathlib as math
 import os
+import sys
 import webbrowser
 
 class EventHandler():
